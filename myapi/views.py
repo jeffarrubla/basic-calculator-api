@@ -7,14 +7,41 @@ from django.shortcuts import render
 @api_view(['GET'])
 def index(request):
 	return  JsonResponse({'message': 
-		'This is a calculator, the functions are: '+
-		'sum: /api/sum/num1/num2'})
+		'This is a calculator, the functions are => '+
+		'sum',
+		'sum': '/api/sum/num1/num2',
+		'subs': '/api/subs/num1/num2',
+		})
 
 @api_view(['GET'])
 def sum(request,a,b):	
 	if request.method == 'GET':
+		try:
+			a = int(a) if float(a).is_integer() else float(a)
+			b = int(b) if float(b).is_integer() else float(b)		
+			return JsonResponse( {'result': a+b}, status=status.HTTP_200_OK,safe=False) 
+		except ValueError as e:					
+			return JsonResponse({"Error":str(e)}, status=status.HTTP_400_BAD_REQUEST) 
+		except:			
+			return JsonResponse({"Error": str(e)}, status=status.HTTP_400_BAD_REQUEST) 	
+			
+	return JsonResponse({"Error": "Not method GET"}, status=status.HTTP_404_NOT_FOUND) 
+
+@api_view(['GET'])
+def subs(request,a,b):	
+	if request.method == 'GET':
 		a = int(a) if float(a).is_integer() else float(a)
 		b = int(b) if float(b).is_integer() else float(b)
-		return JsonResponse( {'result': a+b}, safe=False) 
+		return JsonResponse( {'result': a-b}, safe=False) 
 	
-	return JsonResponse({"Error": "Not method GET"}, status=status.HTTP_404_NOT_FOUND) 
+def to_number(number):
+	try:
+		number = int(number) if float(number).is_integer() else float(number)		
+		return number
+	except ValueError as e:		
+		return e
+		#return JsonResponse({"Error":str(e)}, status=status.HTTP_400_BAD_REQUEST) 
+	except:
+		return e
+		#return JsonResponse({"Error": str(e)}, status=status.HTTP_400_BAD_REQUEST) 	
+	

@@ -22,5 +22,6 @@ urlpatterns = [
     #path('',include('myapi.urls')),
     path('',views.index),
     path('api/',views.index),
-    path('api/sum/<str:a>/<str:b>/',views.sum),
+    path('api/sum/<str:a>/<str:b>/',views.sum, name="sum"),
+    path('api/subs/<str:a>/<str:b>/',views.subs, name="substraction"),
 ]

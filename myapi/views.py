@@ -30,18 +30,13 @@ def sum(request,a,b):
 @api_view(['GET'])
 def subs(request,a,b):	
 	if request.method == 'GET':
-		a = int(a) if float(a).is_integer() else float(a)
-		b = int(b) if float(b).is_integer() else float(b)
-		return JsonResponse( {'result': a-b}, safe=False) 
-	
-def to_number(number):
-	try:
-		number = int(number) if float(number).is_integer() else float(number)		
-		return number
-	except ValueError as e:		
-		return e
-		#return JsonResponse({"Error":str(e)}, status=status.HTTP_400_BAD_REQUEST) 
-	except:
-		return e
-		#return JsonResponse({"Error": str(e)}, status=status.HTTP_400_BAD_REQUEST) 	
-	
+		try:
+			a = int(a) if float(a).is_integer() else float(a)
+			b = int(b) if float(b).is_integer() else float(b)
+			return JsonResponse( {'result': a-b}, safe=False) 
+		except ValueError as e:					
+			return JsonResponse({"Error":str(e)}, status=status.HTTP_400_BAD_REQUEST) 
+		except:			
+			return JsonResponse({"Error": str(e)}, status=status.HTTP_400_BAD_REQUEST) 	
+			
+	return JsonResponse({"Error": "Not method GET"}, status=status.HTTP_404_NOT_FOUND) 

@@ -33,7 +33,7 @@ def subs(request,a,b):
 		try:
 			a = int(a) if float(a).is_integer() else float(a)
 			b = int(b) if float(b).is_integer() else float(b)
-			return JsonResponse( {'result': a-b}, safe=False) 
+			return JsonResponse( {'result': round(a-b,4)}, safe=False) 
 		except ValueError as e:					
 			return JsonResponse({"Error":str(e)}, status=status.HTTP_400_BAD_REQUEST) 
 		except:			
@@ -47,7 +47,7 @@ def mul(request,a,b):
 		try:
 			a = int(a) if float(a).is_integer() else float(a)
 			b = int(b) if float(b).is_integer() else float(b)
-			return JsonResponse( {'result': a*b}, safe=False) 
+			return JsonResponse( {'result': round(a*b,6)}, safe=False) 
 		except ValueError as e:					
 			return JsonResponse({"Error":str(e)}, status=status.HTTP_400_BAD_REQUEST) 
 		except:			

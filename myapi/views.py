@@ -28,7 +28,7 @@ def sum(request,a,b):
 	return JsonResponse({"Error": "Not method GET"}, status=status.HTTP_404_NOT_FOUND) 
 
 @api_view(['GET'])
-def subs(request,a,b):	
+def subt(request,a,b):	
 	if request.method == 'GET':
 		try:
 			a = int(a) if float(a).is_integer() else float(a)

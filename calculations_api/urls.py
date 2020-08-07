@@ -23,6 +23,7 @@ urlpatterns = [
     path('',views.index),
     path('api/',views.index),
     path('api/sum/<str:a>/<str:b>/',views.sum, name="sum"),
-    path('api/subt/<str:a>/<str:b>/',views.subs, name="subtraction"),
+    path('api/subt/<str:a>/<str:b>/',views.subt, name="subtraction"),
     path('api/mul/<str:a>/<str:b>/',views.mul, name="multiplication"),
+    path('api/div/<str:a>/<str:b>/',views.div, name="division"),
 ]

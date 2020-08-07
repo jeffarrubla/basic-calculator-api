@@ -98,3 +98,14 @@ class MulTest(TestCase):
 		# do assertions
 		self.assertEqual(response.json()['result'],121717.387215)
 		self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+class DivTest(TestCase):
+	""" Test mdule for division API """
+
+	def test_div(self):
+		# get API response
+		response = client.get(reverse('division',kwargs={'a':'4','b':'2'}))
+		# do assertions
+		self.assertEqual(response.json()['result'],2)
+		self.assertEqual(response.json()['module'],0)
+		self.assertEqual(response.status_code, status.HTTP_200_OK)

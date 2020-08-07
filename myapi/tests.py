@@ -59,4 +59,4 @@ class SubsTest(TestCase):
 		# get API response
 		response = client.get(reverse('substraction',kwargs={'a':'-','b':'4'}))
 		# do assertions
-		self.assertEqual(response.json()['Error'],"could not convert string to float: '/'")
+		self.assertEqual(response.json()['Error'],"could not convert string to float: '-'")

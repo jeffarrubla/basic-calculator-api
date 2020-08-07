@@ -109,3 +109,25 @@ class DivTest(TestCase):
 		self.assertEqual(response.json()['result'],2)
 		self.assertEqual(response.json()['module'],0)
 		self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+	def test_div_with_symbol(self):
+		# get API response
+		response = client.get(reverse('division',kwargs={'a':'*','b':'52'}))
+		# do assertions
+		self.assertEqual(response.json()['Error'],"could not convert string to float: '*'")
+		self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+	def test_div_with_float(self):
+		# get API response
+		response = client.get(reverse('division',kwargs={'a':'50.20253','b':'70.35'}))
+		# do assertions
+		self.assertEqual(response.json()['result'],0.71361)
+		self.assertEqual(response.json()['module'],50.20253)
+		self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+	def test_div_by_zero(self):
+		# get API response
+		response = client.get(reverse('division',kwargs={'a':'10','b':0}))
+		# do assertions
+		self.assertEqual(response.json()['Error'],'division by zero')
+		self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

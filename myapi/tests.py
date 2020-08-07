@@ -60,3 +60,18 @@ class SubsTest(TestCase):
 		response = client.get(reverse('substraction',kwargs={'a':'-','b':'4'}))
 		# do assertions
 		self.assertEqual(response.json()['Error'],"could not convert string to float: '-'")
+
+class MulTest(TestCase):
+	""" Test module for multiplication API """
+
+	def test_mul(self):
+		# get API response
+		response = client.get(reverse('multiplication',kwargs={'a':3,'b':4}))
+		# do assertions
+		self.assertEqual(response.json()['result'],12)
+
+	def test_mul_with_symbol(self):
+		# get API response
+		response = client.get(reverse('multiplication',kwargs={'a':'3','b':'*'}))
+		# do assertions
+		self.assertEqual(response.json()['Error'],"could not convert string to float: '*'")

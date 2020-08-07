@@ -24,4 +24,5 @@ urlpatterns = [
     path('api/',views.index),
     path('api/sum/<str:a>/<str:b>/',views.sum, name="sum"),
     path('api/subs/<str:a>/<str:b>/',views.subs, name="substraction"),
+    path('api/mul/<str:a>/<str:b>/',views.mul, name="multiplication"),
 ]
